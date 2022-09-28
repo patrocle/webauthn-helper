@@ -34,7 +34,12 @@ const base64UrlDecode = (input) => {
 };
 
 // Converts an array of bytes into a Base64Url string
-const arrayToBase64String = (a) => btoa(String.fromCharCode(...a));
+const arrayToBase64String = (a) =>{
+    return btoa(String.fromCharCode(...a))
+        .replace(/\+/g, '-') // Convert '+' to '-'
+        .replace(/\//g, '_') // Convert '/' to '_'
+        .replace(/=+$/, ''); // Remove ending '='
+}
 
 // Prepares the public key options object returned by the Webauthn Framework
 export const preparePublicKeyOptions = publicKey => {
